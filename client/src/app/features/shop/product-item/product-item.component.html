@@ -1,5 +1,8 @@
 @if (product){
-    <mat-card appearance="raised" class="h-full flex flex-col">
+    <mat-card appearance="raised" 
+        class="product-card h-full flex flex-col "
+        routerLink="/shop/{{product.id}}"
+    >
        <div class="w-full h-32 sm:h-40 md:h-48 lg:h-56 xl:h-64 bg-gray-100 overflow-hidden rounded-t-lg">
             <img 
                 src="{{product.pictureUrl}}" 
