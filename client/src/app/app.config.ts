@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, LOCALE_ID, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -7,15 +7,32 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginatorIntl } from './core/i18n/custom-paginator-intl';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
+import { InitService } from './core/services/init.service';
+import { lastValueFrom } from 'rxjs';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(withInterceptors([errorInterceptor, loadingInterceptor])),
+    provideAppInitializer(async () => {
+      const initService = inject(InitService);
+      return lastValueFrom(initService.init()).finally(() => {
+        const splash = document.getElementById('initial-splash');
+        if(splash) {
+          splash.remove();
+        }
+      })
+    }),
     {
       provide: MatPaginatorIntl,
       useClass: CustomPaginatorIntl
-    }
+    },
+    { provide: LOCALE_ID, useValue: 'fr-BE' },
+    /*{
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {autoFocus : 'dialog', restoreFocus: true}
+    }*/
   ]
 };

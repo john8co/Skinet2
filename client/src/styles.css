@@ -1,9 +1,16 @@
 @import 'tailwindcss';
 
-.container{
+.container {
     @apply mx-auto px-1
 }
 
-.text-primary{
+.text-primary {
     @apply text-blue-700
+}
+
+@layer base {
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor:pointer;
+    }
 }
