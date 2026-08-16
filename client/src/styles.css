@@ -8,9 +8,19 @@
     @apply text-blue-700
 }
 
+html {
+    scrollbar-gutter: stable;
+}
+
 @layer base {
     button:not(:disabled),
     [role="button"]:not(:disabled) {
         cursor:pointer;
+    }
+}
+
+mat-progress-bar {
+    &.fixed {
+        position: fixed !important;
     }
 }

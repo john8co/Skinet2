@@ -1,6 +1,6 @@
-<header class="shadow-md p-3 w-full max-h-25 fixed top-0 z-50 bg-white">
-    <div class="flex align-middle items-center justify-between w-full px-4">
-        <img  routerLink="/" src="/images/Logo.png" alt="app logo" class="max-h-24">
+<header class="shadow-md w-full h-25 fixed top-0 z-50 bg-white">
+    <div class="flex items-center justify-between w-full h-full px-4">
+        <img  routerLink="/" src="/images/Logo.png" alt="app logo" class="h-full py-1 object-contain">
         <nav class="flex gap-3 my-2 uppercase text-2xl">
             <a routerLink="/" 
                 routerLinkActive="active"
@@ -18,7 +18,4 @@
         </div>
     </div>
 </header>
-
-@if(busyService.loading()) {
-    <mat-progress-bar mode="indeterminate" class="fixed top-25 z-50"></mat-progress-bar>
-}
+<mat-progress-bar mode="indeterminate" class="fixed top-25 z-50"[class.invisible]="!busyService.loading()"></mat-progress-bar>
