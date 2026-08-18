@@ -2,6 +2,7 @@ using API.Middleware;
 using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -27,15 +28,20 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
 builder.Services.AddSingleton<ICartService, CartServices>();
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>()
+    .AddErrorDescriber<FrenchIdentityErrorDescriber>()
     .AddEntityFrameworkStores<StoreContext>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials()
     .WithOrigins("http://localhost:4200", "https://localhost:4200"));
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<AppUser>(); //api/login

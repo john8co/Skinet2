@@ -13,9 +13,32 @@
             <a routerLink="/cart" routerLinkActive="active" matBadge="{{cartService.itemCount()}}" matBadgeSize="large" class="custom-badge mt-2 mr-2">
                 <mat-icon>shopping_cart</mat-icon>
             </a>
-            <button mat-stroked-button>Login</button>
-            <button mat-stroked-button>Register</button>
+            @if (accountService.currentUser()){
+                <button mat-button [matMenuTriggerFor]="menu">
+                    <mat-icon>arrow_drop_down</mat-icon>
+                    <span>{{accountService.currentUser()?.email}}</span>
+                </button>
+            } @else {
+                <button routerLink="/account/login" mat-stroked-button>Se connecter</button>
+                <button routerLink="/account/register" mat-stroked-button>Créer un compte</button>
+            }            
         </div>
     </div>
 </header>
 <mat-progress-bar mode="indeterminate" class="fixed top-25 z-50"[class.invisible]="!busyService.loading()"></mat-progress-bar>
+
+<mat-menu #menu="matMenu" class="px-5">
+    <button mat-menu-item class="px-3" routerLink="/cart">
+        <mat-icon>shopping_cart</mat-icon>
+        Mon panier
+    </button>
+    <button mat-menu-item class="px-3" routerLink="/orders">
+        <mat-icon>history</mat-icon>
+        Mes commandes
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item class="px-3" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Se déconnecter
+    </button>
+</mat-menu>

@@ -13,7 +13,7 @@ export class CartService {
   private http = inject(HttpClient);
   cart = signal<Cart | null>(null);
   itemCount = computed(() => {
-    return this.cart()?.items.reduce((sum, item) => sum + item.quantity, 0)
+    return this.cart()?.items.reduce((sum, item) => sum + item.quantity, 0) ?? 0
   })
   totals = computed(() => {
     const cart = this.cart();
