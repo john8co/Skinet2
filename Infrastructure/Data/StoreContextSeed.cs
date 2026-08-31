@@ -1,5 +1,5 @@
 using System.Text.Json;
-using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
@@ -7,16 +7,20 @@ public class StoreContextSeed
 {
     public static async Task SeedAsync(StoreContext context)
     {
-        if (!context.Products.Any())
-        {
-            var productsData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/products.json");
-            var products = JsonSerializer.Deserialize<List<Product>>(productsData);
+        await SeedEntityAsync(context, context.Products, "products.json");
+        await SeedEntityAsync(context, context.DeliveryMethods, "delivery.json");
+    }
 
-            if(products == null) return;
+    private static async Task SeedEntityAsync<T>(StoreContext context, DbSet<T> dbSet, string fileName) where T : class
+    {
+        if (dbSet.Any()) return;
 
-            context.Products.AddRange(products);
+        var data = await File.ReadAllTextAsync($"../Infrastructure/Data/SeedData/{fileName}");
+        var entities = JsonSerializer.Deserialize<List<T>>(data);
 
-            await context.SaveChangesAsync();
-        }
+        if (entities == null || entities.Count == 0) return;
+
+        dbSet.AddRange(entities);
+        await context.SaveChangesAsync();
     }
 }

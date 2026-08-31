@@ -82,7 +82,7 @@ public class AccountController(SignInManager<AppUser> signInManager) : BaseApiCo
 
         var result = await signInManager.UserManager.UpdateAsync(user);
 
-        if (!result.Succeeded) return BadRequest("Problem updating user address");
+        if (!result.Succeeded) return BadRequest("Problème en mettant à jour l'adresse de l'utilisateur");
 
         return Ok(user.Address.ToDto());
     }

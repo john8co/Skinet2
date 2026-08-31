@@ -19,7 +19,7 @@ public class CartController(ICartService cartService): BaseApiController
     {
         var updatedCart = await cartService.SetCartAsync(cart);
 
-        if (updatedCart == null) return BadRequest("Problem with cart");
+        if (updatedCart == null) return BadRequest("Problème avec le panier");
 
         return updatedCart;
     }
@@ -29,7 +29,7 @@ public class CartController(ICartService cartService): BaseApiController
     {
         var result = await cartService.DeleteCartAsync(id);
         
-        if(!result) return BadRequest("Problem deleting cart");
+        if(!result) return BadRequest("Problème pour supprimer le panier");
 
         return Ok();
     }

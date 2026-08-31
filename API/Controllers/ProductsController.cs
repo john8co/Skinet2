@@ -1,4 +1,3 @@
-using API.RequestHelpers;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -34,14 +33,14 @@ public class ProductsController(IGenericRepository<Product> repo) : BaseApiContr
         {
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
-        return BadRequest("Problem creating product");
+        return BadRequest("Problème pour créer le produit");
     }
 
     [HttpPut("{id:int}")]
     public async Task<ActionResult> UpdateProduct(int id, Product product)
     {
         if(product.Id != id || !ProductExists(id)) 
-            return BadRequest("Cannot update this product");
+            return BadRequest("Impossible de mettre à jour le produit");
         
         repo.Update(product);
 
@@ -49,7 +48,7 @@ public class ProductsController(IGenericRepository<Product> repo) : BaseApiContr
         {
             return NoContent();
         }
-        return BadRequest("Problem updating the product");
+        return BadRequest("Problème en mettant à jour le produit");
     }
 
     [HttpDelete("{id:int}")]
@@ -65,7 +64,7 @@ public class ProductsController(IGenericRepository<Product> repo) : BaseApiContr
         {
             return NoContent();
         }
-        return BadRequest("Problem deleting the product");
+        return BadRequest("Problème pour supprimer le produit");
     }
 
     [HttpGet("brands")]
