@@ -67,10 +67,10 @@ public class ProductsController(IUnitOfWork unit) : BaseApiController
         return BadRequest("Problème pour supprimer le produit");
     }
 
-    [HttpGet("brands")]
-    public async Task<ActionResult<IReadOnlyList<string>>> GetBrands()
+    [HttpGet("colors")]
+    public async Task<ActionResult<IReadOnlyList<string>>> GetColors()
     {
-        var spec = new BrandListSpecification();
+        var spec = new ColorListSpecification();
         return Ok(await unit.Repository<Product>().ListAsync(spec));
     }
 

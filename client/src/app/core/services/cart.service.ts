@@ -101,7 +101,7 @@ export class CartService {
       price: item.price,
       quantity: 0,
       pictureUrl: item.pictureUrl,
-      brand: item.brand,
+      color: item.color,
       type: item.type
     }
   }

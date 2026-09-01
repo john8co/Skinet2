@@ -48,7 +48,7 @@ export class ShopComponent implements OnInit{
   }
 
   initializeShop(){
-    this.shopService.getBrands();
+    this.shopService.getColors();
     this.shopService.getTypes();
     this.getProducts();
   }
@@ -94,7 +94,7 @@ export class ShopComponent implements OnInit{
     const dialogRef = this.dialogService.open(FiltersDialogComponent, {
       minHeight: '500px',
       data: {
-        selectedBrands: this.shopParams().brands,
+        selectedColors: this.shopParams().colors,
         selectedTypes: this.shopParams().types
       }
     });
@@ -103,7 +103,7 @@ export class ShopComponent implements OnInit{
         if (result) {
             this.shopParams.update(params => ({
               ...params,
-              brands: result.selectedBrands,
+              colors: result.selectedColors,
               types: result.selectedTypes,
               pageNumber: 1
             }));

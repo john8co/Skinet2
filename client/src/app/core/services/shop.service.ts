@@ -12,13 +12,13 @@ export class ShopService {
   baseUrl = environment.apiUrl;  
   private http = inject(HttpClient);
   types = signal<string[]>([]);
-  brands = signal<string[]>([]);
+  colors = signal<string[]>([]);
 
   getProducts(shopParams: ShopParams) {
     let params = new HttpParams();
 
-    if(shopParams.brands.length > 0) {
-      params = params.append('brands', shopParams.brands.join(','));
+    if(shopParams.colors.length > 0) {
+      params = params.append('colors', shopParams.colors.join(','));
     }
 
     if(shopParams.types.length > 0) {
@@ -43,10 +43,10 @@ export class ShopService {
     return this.http.get<Product>(this.baseUrl + 'products/' +id)
   }
 
-  getBrands(){
-    if (this.brands.length > 0) return;
-    return this.http.get<string[]>(this.baseUrl + 'products/brands').subscribe({
-      next: response => this.brands.set(response)
+  getColors(){
+    if (this.colors.length > 0) return;
+    return this.http.get<string[]>(this.baseUrl + 'products/colors').subscribe({
+      next: response => this.colors.set(response)
     })
   }
 

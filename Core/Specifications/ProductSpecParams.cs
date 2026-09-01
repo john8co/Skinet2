@@ -4,7 +4,7 @@ public class ProductSpecParams
 {
     private const int MaxPageSize = 50;
     private int _pageSize = 6;
-    private List<string> _brands = [];    
+    private List<string> _colors = [];
     private List<string> _types = [];
     private string? _search;
     
@@ -15,12 +15,12 @@ public class ProductSpecParams
         get => _pageSize;
         set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
     }
-    public List<string> Brands
+    public List<string> Colors
     {
-        get => _brands;
+        get => _colors;
         set
         {
-            _brands = value.SelectMany(x => x.Split(',', StringSplitOptions.RemoveEmptyEntries)).ToList();
+            _colors = value.SelectMany(x => x.Split(',', StringSplitOptions.RemoveEmptyEntries)).ToList();
         }
     }
     public List<string> Types

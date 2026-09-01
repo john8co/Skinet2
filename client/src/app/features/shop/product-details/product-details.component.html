@@ -3,7 +3,7 @@
         <div class="max-w-screen-2xl px-4 mx-auto">
             <div class="grid grid-cols-2 gap-8">
                 <div class="max-w-xl mx-auto">
-                    <img class="w-full" src="{{product()!.pictureUrl}}" alt="product image">
+                    <img class="w-full" [src]="product()!.pictureUrl" (error)="$event.target.src='/images/placeholder.png'" alt="{{product()!.name}}">
                 </div>
                 <div>
                     <h1 class="text-2xl font-semibold text-gray-900">{{product()!.name}}</h1>

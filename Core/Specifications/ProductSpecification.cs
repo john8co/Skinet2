@@ -6,7 +6,7 @@ public class ProductSpecification : BaseSpecification<Product>
 {
     public ProductSpecification(ProductSpecParams specParams) : base(x => 
         (string.IsNullOrEmpty(specParams.Search) || x.Name.ToLower().Contains(specParams.Search)) &&
-        (!specParams.Brands.Any() || specParams.Brands.Contains(x.Brand)) &&
+        (!specParams.Colors.Any() || specParams.Colors.Contains(x.Color)) &&
         (!specParams.Types.Any() || specParams.Types.Contains(x.Type))
     )
     {

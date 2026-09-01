@@ -1,5 +1,5 @@
 export class ShopParams{
-    brands: string[] = [];
+    colors: string[] = [];
     types: string[] = [];
     sort = 'name';
     pageNumber = 1;

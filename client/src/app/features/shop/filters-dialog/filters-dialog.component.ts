@@ -23,12 +23,12 @@ export class FiltersDialogComponent {
   private dialogRef = inject(MatDialogRef<FiltersDialogComponent>);
   data = inject(MAT_DIALOG_DATA);
 
- selectedBrands: string[] = [...this.data.selectedBrands];
+ selectedColors: string[] = [...this.data.selectedColors];
   selectedTypes: string[] = [...this.data.selectedTypes];
 
   applyFilters() {
     this.dialogRef.close({
-      selectedBrands: this.selectedBrands,
+      selectedColors: this.selectedColors,
       selectedTypes: this.selectedTypes
     });
   }

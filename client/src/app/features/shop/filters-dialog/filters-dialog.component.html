@@ -3,10 +3,10 @@
     <mat-divider></mat-divider>
     <div class="flex p-4">
         <div class="w-1/2">
-            <h4 class="font-semibold text-xl text-primary">Marques</h4>
-            <mat-selection-list [(ngModel)]="selectedBrands" [multiple]="true">
-                @for (brand of shopService.brands(); track $index) {
-                    <mat-list-option [value]="brand">{{brand}}</mat-list-option>
+            <h4 class="font-semibold text-xl text-primary">Couleurs</h4>
+            <mat-selection-list [(ngModel)]="selectedColors" [multiple]="true">
+                @for (color of shopService.colors(); track $index) {
+                    <mat-list-option [value]="color">{{color}}</mat-list-option>
                 }
             </mat-selection-list>
         </div>

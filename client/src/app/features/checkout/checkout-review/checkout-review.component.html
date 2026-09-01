@@ -15,7 +15,7 @@
                     <tr>
                         <td class="py-4">
                             <div class="flex items-center gap-4">
-                                <img src="{{item.pictureUrl}}" alt="Image du produit" class="w-10 h-10">
+                                <img src="{{item.pictureUrl}}" (error)="$event.target.src='/images/placeholder.png'" alt="Image du produit" class="w-10 h-10">
                                 <span>{{item.productName}}</span>
                             </div>
                         </td>

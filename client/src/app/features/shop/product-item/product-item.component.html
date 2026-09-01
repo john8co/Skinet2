@@ -1,7 +1,7 @@
 @if (product){
     <mat-card appearance="raised" class="product-card h-full flex flex-col" routerLink="/shop/{{product.id}}">
        <div class="w-full aspect-square bg-gray-100 overflow-hidden rounded-t-lg flex items-center justify-center">
-            <img src="{{product.pictureUrl}}" alt="image of {{product.name}}" class="w-full h-full object-contain">
+            <img src="{{product.pictureUrl}}" (error)="$event.target.src='/images/placeholder.png'" alt="image of {{product.name}}" class="w-full h-full object-contain">
         </div>
         <mat-card-content class="mt-2 flex-1">
             <h2 class="text-sm font-semibold uppercase">{{product.name}}</h2>
